@@ -1,0 +1,27 @@
+{% extends 'parent.html' %}
+
+{% block body %}
+    <style>
+    .imagem {
+            max-width: 900px;
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+            margin-right: 30px;
+            margin-left: 30px;
+            box-shadow: 4px 4px 4px lightgray;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="text-center mt-5">
+                    <h1 class="display-4">Bem-vindo ao Dicionário de Conceitos Médicos</h1>
+                    <img class = "imagem" src={{ url_for('static', filename='imagem.jpg') }} alt="Exemplo de Imagem">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

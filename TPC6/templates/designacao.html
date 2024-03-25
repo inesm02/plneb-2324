@@ -1,0 +1,112 @@
+{% extends 'parent.html' %}
+
+{% block body %}
+    <style>
+    h1 {
+        margin-top: 0px;
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 2px lightgray;
+        text-align: center;
+        }
+    button {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+</style>
+    <button onclick="goBack()" class="btn btn-outline-secondary">Voltar</button>
+    <h1>{{ conceito }}</h1>
+    <div class="accordion" id="descricao">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <strong>Descrição do termo</strong>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  {{ designacao["desc"] }}
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoEN" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong>Tradução do termo em inglês</strong>
+              </button>
+            </h2>
+            <div id="collapseTwoEN" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ designacao["en"] }}
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoES" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong>Tradução do termo em espanhol</strong>
+              </button>
+            </h2>
+            <div id="collapseTwoES" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ designacao["es"] }}
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoIT" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong>Tradução do termo em italiano</strong>
+              </button>
+            </h2>
+            <div id="collapseTwoIT" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ designacao["it"] }}
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoFR" aria-expanded="false" aria-controls="collapseTwo">
+                  <strong>Tradução do termo em francês</strong>
+              </button>
+            </h2>
+            <div id="collapseTwoFR" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                {{ designacao["fr"] }}
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="text-center mt-3" style="margin-bottom: 75px;">
+        <button onclick="irParaTermoAnterior()" class="btn btn-light">Conceito Anterior</button>
+        <button onclick="irParaProximoTermo()" class="btn btn-light">Próximo Conceito</button>
+    </div>
+
+    <script>
+        var conceitos = Object.keys({{ conceitos|tojson }});
+        var indiceAtual = conceitos.indexOf("{{ conceito }}");
+
+        function irParaTermoAnterior() {
+            if (indiceAtual > 0) {
+                indiceAtual--;
+                atualizarPagina();
+            }
+        }
+
+        function irParaProximoTermo() {
+            if (indiceAtual < conceitos.length - 1) {
+                indiceAtual++;
+                atualizarPagina();
+            }
+        }
+
+        function atualizarPagina() {
+            var novoConceito = conceitos[indiceAtual];
+            window.location.href = "/conceitos/" + novoConceito;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+{% endblock %}
