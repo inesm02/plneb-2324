@@ -1,0 +1,69 @@
+{% extends 'parent.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+<style>
+    /* Estilos para a tabela */
+    #myTable {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    }
+
+    /* Estilos para o cabeçalho da tabela */
+    #myTable th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    /* Estilos para as células de dados */
+    #myTable td {
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+        background-color: #ffffff;
+    }
+
+    /* Estilos para as linhas pares */
+    #myTable tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para as células de dados quando o mouse passa por cima */
+    #myTable tr:hover td {
+        background-color: #ddd;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>Conceito</th>
+            <th>Descrição</th>
+            <th>Inglês</th>
+            <th>Espanhol</th>
+            <th>Italiano</th>
+            <th>Francês</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, value in conceitos.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value.desc }}</td>
+                <td>{{ value.en }}</td>
+                <td>{{ value.es }}</td>
+                <td>{{ value.it }}</td>
+                <td>{{ value.fr }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
